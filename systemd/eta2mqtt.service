@@ -1,0 +1,13 @@
+[Unit]
+Description=ETA Pellet Heater to MQTT
+
+[Service]
+ExecStart=/usr/bin/node /home/pi/proj/smarthome/eta2mqtt/index.js 
+# Required on some systems
+WorkingDirectory=/home/pi/proj/smarthome/eta2mqtt
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
