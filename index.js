@@ -88,7 +88,7 @@ function recurseXMLTree(data) {
 		getVariable(name, uri);
 
 		var tree=element['object'];
-		if(tree && !name.includes('zeiten')) {
+		if(tree /*&& !name.includes('zeiten')*/) {
 			recurseXMLTree(tree);
 		}
 	});
