@@ -10,7 +10,7 @@ var valtree = {};
 const optionDefinitions = [
 	{ name: 'host', alias: 'h', type: String, defaultValue: "192.168.10.99" },
 	{ name: 'id', alias: 'i', type: String, defaultValue: "eta" },
-	{ name: 'wait', alias: 'w', type: Number, defaultValue: 1000 },
+	{ name: 'wait', alias: 'w', type: Number, defaultValue: 10 },
   	{ name: 'debug', alias: 'd', type: Boolean, defaultValue: false },
   	{ name: 'mqtthost', alias: 'm', type: String, defaultValue: "localhost"},
   ];
@@ -19,6 +19,8 @@ const options = commandLineArgs(optionDefinitions)
 
 console.log("MQTT host     : " + options.mqtthost);
 console.log("MQTT Client ID: " + options.id);
+console.log("Wait       (s): " + options.wait);
+console.log("ETA host      : " + options.host);
 
 function sendMqtt(data) {
 	MQTTclient.publish(options.id + "/" + options.host, JSON.stringify(data));
@@ -123,7 +125,7 @@ function getRoot(url) {
 
 function timer(id) {
 	getRoot("http://"+options.host+":8080/user/menu");
-	setTimeout(timer, 10000, id);
+	setTimeout(timer, options.wait*1000, id);
 	if(Object.keys(valtree).length) {
 		if(options.debug) {
 			console.log(util.inspect(valtree));
