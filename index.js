@@ -64,7 +64,9 @@ function getVariable(name, path) {
 					if(options.debug) {
 						console.log("name: " + name + "val: "+val+" decPlaces: "+decPlaces+" scaleFactor: "+scaleFactor + " = num: " + num);
 					}
-					valtree[path] = num;
+					var topic=path+"/"+name;
+					topic = topic.replace(/ä/g, 'ae').replace(/ü/g, 'ue').replace(/ö/g, 'oe').replace(/ß/g, 'ss').replace(/ /g, '').replace(/\./g, '').replace(/-/g, '').replace(/:/g, '').replace(/°/g,'');
+					valtree[topic] = num;
 				}
 			}
 		});
