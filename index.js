@@ -23,7 +23,7 @@ console.log("Wait       (s): " + options.wait);
 console.log("ETA host      : " + options.host);
 
 function sendMqtt(data) {
-	MQTTclient.publish(options.id + "/" + options.host, JSON.stringify(data));
+	MQTTclient.publish(options.id + "/" + options.host, JSON.stringify(data), { retain: true });
 }
   
 var MQTTclient = mqtt.connect("mqtt://"+options.mqtthost,{clientId: options.id});
